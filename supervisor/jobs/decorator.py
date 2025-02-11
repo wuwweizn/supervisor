@@ -17,7 +17,12 @@ from ..exceptions import (
     JobGroupExecutionLimitExceeded,
 )
 from ..host.const import HostFeature
-from ..resolution.const import MINIMUM_FREE_SPACE_THRESHOLD, ContextType, IssueType, UnsupportedReason
+from ..resolution.const import (
+    MINIMUM_FREE_SPACE_THRESHOLD,
+    ContextType,
+    IssueType,
+    UnsupportedReason,
+)
 from ..utils.sentry import capture_exception
 from . import SupervisorJob
 from .const import JobCondition, JobExecutionLimit
@@ -437,7 +442,8 @@ class Job(CoreSysAttributes):
             )
         if (
             JobCondition.ARCHITECTURE_SUPPORTED in used_conditions
-            and UnsupportedReason.SYSTEM_ARCHITECTURE in coresys.sys_resolution.unsupported
+            and UnsupportedReason.SYSTEM_ARCHITECTURE
+            in coresys.sys_resolution.unsupported
         ):
             raise JobConditionException(
                 f"'{method_name}' blocked from execution, unsupported system architecture"
