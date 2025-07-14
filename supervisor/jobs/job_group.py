@@ -3,7 +3,7 @@
 from asyncio import Lock
 
 from ..coresys import CoreSys, CoreSysAttributes
-from ..exceptions import JobException, JobGroupExecutionLimitExceeded
+from ..exceptions import JobGroupExecutionLimitExceeded
 from . import SupervisorJob
 
 
@@ -70,10 +70,11 @@ class JobGroup(CoreSysAttributes):
         self._active_job = job
 
     def release(self) -> None:
-        """Release the lock for the group or return it to parent."""
-        if not self.has_lock:
-            raise JobException("Cannot release as caller does not own lock")
+        """Release the lock for the group or return it to parent.
 
+        It is the callers responsibility to ensure that the lock is only released
+        when the lock is actually being held.
+        """
         if self._parent_jobs:
             self._active_job = self._parent_jobs.pop()
         else:

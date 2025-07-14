@@ -111,7 +111,7 @@ class Job(CoreSysAttributes):
             JobExecutionLimit.GROUP_WAIT: (JobConcurrency.GROUP_QUEUE, None),
             JobExecutionLimit.GROUP_THROTTLE: (None, JobThrottle.GROUP_THROTTLE),
             JobExecutionLimit.GROUP_THROTTLE_WAIT: (
-                JobConcurrency.QUEUE,  # Seems a bit counter intuitive, but GROUP_QUEUE deadlocks tests/jobs/test_job_decorator.py::test_execution_limit_group_throttle_wait
+                JobConcurrency.GROUP_QUEUE,
                 JobThrottle.GROUP_THROTTLE,
             ),
             JobExecutionLimit.GROUP_THROTTLE_RATE_LIMIT: (
@@ -147,19 +147,6 @@ class Job(CoreSysAttributes):
                     f"Job {self.name} is using throttle {self.throttle} without throttle max calls!"
                 )
             self._rate_limited_calls = {}
-
-        if self.throttle in (
-            JobThrottle.GROUP_THROTTLE,
-            JobThrottle.GROUP_RATE_LIMIT,
-        ) and self.concurrency in (
-            JobConcurrency.GROUP_REJECT,
-            JobConcurrency.GROUP_QUEUE,
-        ):
-            # We cannot release group locks when Job is not running (e.g. throttled)
-            # which makes these combinations impossible to use currently.
-            raise RuntimeError(
-                f"Job {self.name} is using group throttling ({self.throttle}) with group concurrency ({self.concurrency}), which is not allowed!"
-            )
 
     @property
     def throttle_max_calls(self) -> int:
@@ -505,7 +492,7 @@ class Job(CoreSysAttributes):
             JobConcurrency.GROUP_REJECT,
             JobConcurrency.GROUP_QUEUE,
         ):
-            if job_group and job_group.has_lock:
+            if job_group:
                 job_group.release()
 
     async def _handle_concurrency_control(
