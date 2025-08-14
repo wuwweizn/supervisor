@@ -24,7 +24,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout wwzn-china
-          cp .github/workflows/wwzn-Auto-Update.yaml /tmp/
+          cp .github/workflows/wwzn-Automatic-update. /tmp/
           cp .github/workflows/wwzn-build-china.yaml /tmp/
           cp .github/workflows/builder.yml /tmp/
 
@@ -41,7 +41,7 @@ jobs:
           for branch in $(git branch -r | grep upstream/ | grep -v HEAD | sed 's|upstream/||'); do
             git checkout -B $branch upstream/$branch
             mkdir -p .github/workflows
-            cp -f /tmp/wwzn-Auto-Update.yaml .github/workflows/wwzn-Auto-Update.yaml
+            cp -f /tmp/wwzn-Automatic-update.yaml .github/workflows/wwzn-Automatic-update.yaml
             cp -f /tmp/wwzn-build-china.yaml .github/workflows/wwzn-build-china.yaml
             cp -f /tmp/builder.yml .github/workflows/builder.yml
             git add .github/workflows/
@@ -52,7 +52,7 @@ jobs:
             echo "Processing tag $tag"
             git checkout -B temp-$tag $tag
             mkdir -p .github/workflows
-            cp -f /tmp/wwzn-Auto-Update.yaml .github/workflows/wwzn-Auto-Update.yaml
+            cp -f /tmp/wwzn-Automatic-update.yaml .github/workflows/wwzn-Automatic-update.yaml
             cp -f /tmp/wwzn-build-china.yaml .github/workflows/wwzn-build-china.yaml
             cp -f /tmp/builder.yml .github/workflows/builder.yml
             git add .github/workflows/
@@ -70,11 +70,11 @@ jobs:
       - name: Copy custom workflows from wwzn-china
         run: |
           git checkout main
-          cp -f /tmp/wwzn-Auto-Update.yaml .github/workflows/wwzn-Auto-Update.yaml 
+          cp -f /tmp/wwzn-Automatic-update.yaml .github/workflows/wwzn-Automatic-update.yaml 
           cp -f /tmp/wwzn-build-china.yaml .github/workflows/wwzn-build-china.yaml
           cp -f /tmp/builder.yml .github/workflows/builder.yml
           #mv .github/workflows/builder.yml .github/workflows/builder.bak 
-          git add .github/workflows/wwzn-build-china.yaml .github/workflows/Auto_Update.yaml .github/workflows/builder.yml
+          git add .github/workflows/wwzn-build-china.yaml .github/workflows/wwzn-Automatic-update.yaml .github/workflows/builder.yml
           git commit -m "Restore custom workflows from wwzn-china" || echo "Nothing to commit"
 
       - name: Push updates back with PAT ✅ 强制使用 PAT 推送
