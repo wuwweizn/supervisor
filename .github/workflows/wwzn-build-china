@@ -1,4 +1,4 @@
-name: Build supervisor - china
+name: Build supervisor - china1
 
 on:
   workflow_dispatch:
