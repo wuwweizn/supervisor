@@ -24,7 +24,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout wwzn-china
-          cp .github/workflows/wwzn-Automatic-update. /tmp/
+          cp .github/workflows/wwzn-Automatic-update.yaml /tmp/
           cp .github/workflows/wwzn-build-china.yaml /tmp/
           cp .github/workflows/builder.yml /tmp/
 
