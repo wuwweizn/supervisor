@@ -70,8 +70,8 @@ jobs:
       - name: Copy custom workflows from China
         run: |
           git checkout main
-          cp -f /tmp/Auto_Update.yaml .github/workflows/wwzn-Auto-Update.yaml 
-          cp -f /tmp/build-CN.yaml .github/workflows/wwzn-build-china.yaml
+          cp -f /tmp/wwzn-Auto-Update.yaml .github/workflows/wwzn-Auto-Update.yaml 
+          cp -f /tmp/wwzn-build-china.yaml .github/workflows/wwzn-build-china.yaml
           cp -f /tmp/builder.yml .github/workflows/builder.yml
           #mv .github/workflows/builder.yml .github/workflows/builder.bak 
           git add .github/workflows/wwzn-build-china.yaml .github/workflows/Auto_Update.yaml .github/workflows/builder.yml
