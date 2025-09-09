@@ -125,7 +125,7 @@ jobs:
             sed -i  \
               -e 's|version.home-assistant.io|gitee.com/wuwzn/version/raw/master|g' \
               -e 's|github.com/home-assistant/addons|gitee.com/wuwzn/ha-addons-cn|g' supervisor/const.py
-            sed -i 's|ghcr.io/home-assistant|ghcr.nju.edu.cn/ha-china|g' supervisor/supervisor.py              
+            sed -i 's|ghcr.io/home-assistant|ghcr.nju.edu.cn/wuwweizn|g' supervisor/supervisor.py              
             sed -i 's|ghcr.io|ghcr.nju.edu.cn|g' supervisor/homeassistant/module.py
             sed -i 's|ghcr.io|ghcr.nju.edu.cn|g' supervisor/plugins/base.py
             sed -i 's|ghcr.io|ghcr.nju.edu.cn|g' supervisor/addons/build.py
