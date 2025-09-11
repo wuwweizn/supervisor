@@ -111,7 +111,7 @@ jobs:
           fetch-depth: 0
         
           
-      - name: Optimize network configuration for China region
+      - name: Optimize network configuration for ZhongGUO region
         env:
           ACC_URL: ${{ secrets.ACC_URL }}
           ORI_URL: ${{ secrets.ORI_URL }}
